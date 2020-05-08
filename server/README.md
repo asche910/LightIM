@@ -2,7 +2,7 @@
 
 **package format**
 
-| 8 bytes | 4 bytes | 4 bytes | 1 byte | 4 bytes | n bytes |
+| 8 bytes | 16 bytes | 16 bytes | 1 byte | 2 bytes | n bytes |
 | --- | --- | --- | --- | --- | --- |
 | timestamp  | from | to | type | length | content |
 
