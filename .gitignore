@@ -4,8 +4,8 @@
 
 
 # server
-./server/.idea
+server/.idea
 
 
 # client
-./client/build
+client/build
