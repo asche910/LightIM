@@ -5,3 +5,7 @@
 
 # server
 ./server/.idea
+
+
+# client
+./client/build
