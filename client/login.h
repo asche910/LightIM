@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QWidget>
 
+
 class Login : public QWidget
 {
     Q_OBJECT
@@ -14,12 +15,14 @@ private:
     QPushButton *btnLogin;
 
 private slots:
-
+    void login();
 
 public:
     explicit Login(QWidget *parent = nullptr);
 
 signals:
+    void display(int number);
+    void sendData(QString username, QString passsword);
 
 };
 

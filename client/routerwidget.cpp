@@ -2,6 +2,10 @@
 
 RouterWidget::RouterWidget(QWidget *parent): QWidget(parent)
 {
+
+    setWindowTitle(tr("LightIM"));
+    mainLayout = new QVBoxLayout;
+
     // windows
     login = new Login;
     mainwindow = new MainWindow;
@@ -9,11 +13,14 @@ RouterWidget::RouterWidget(QWidget *parent): QWidget(parent)
     stackLayout = new QStackedLayout;
     stackLayout->addWidget(login);
     stackLayout->addWidget(mainwindow);
-    stackLayout->setCurrentIndex(0);
+    stackLayout->setCurrentIndex(1);
+
+    connect(login, &Login::display, stackLayout, &QStackedLayout::setCurrentIndex);
+    connect(mainwindow, &MainWindow::display, stackLayout, &QStackedLayout::setCurrentIndex);
 
 
+    connect(login, &Login::sendData, mainwindow, &MainWindow::handleLogin);
 
-    mainLayout = new QVBoxLayout;
     mainLayout->addLayout(stackLayout);
     setLayout(mainLayout);
 
