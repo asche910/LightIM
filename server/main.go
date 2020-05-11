@@ -28,6 +28,7 @@ func main() {
 			continue
 		}
 		if login(client) {
+			//client.Write([]byte("hello,client!"))
 			go handle(client)
 		} else {
 			log.Println("login failed!")

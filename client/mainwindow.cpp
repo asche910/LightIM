@@ -20,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent)
 
     // left
     QListWidget *listWidget = new QListWidget;
-//    userList = {"Asche", "root", "admin", "Alice"};
     for(auto &i: userList){
         listWidget->addItem(i);
     }
@@ -47,6 +46,8 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent)
 void MainWindow::handleLogin(QString username, QString password){
     qDebug() << username;
     qDebug() << password;
+
+    loginUser = username;
 }
 
 void MainWindow::listListen(int idx){

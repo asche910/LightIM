@@ -7,6 +7,7 @@
 
 ChatDialog::ChatDialog(QWidget *parent) : QWidget(parent)
 {
+
     textEdit = new QTextEdit;
     textEdit->setReadOnly(true);
     textEdit->setFocusPolicy(Qt::NoFocus);

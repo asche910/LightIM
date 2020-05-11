@@ -3,8 +3,7 @@
 
 #include <QList>
 
-
-
+extern QString loginUser;
 
 extern QList<QString> userList;
 extern int curUserIndex;

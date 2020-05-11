@@ -1,3 +1,4 @@
+#include "client.h"
 #include "mainwindow.h"
 #include "routerwidget.h"
 
@@ -10,11 +11,10 @@ int main(int argc, char *argv[])
 //    MainWindow w;
 //    w.show();
 
-//    Login login;
-//    login.show();
+//    RouterWidget rw;
+//    rw.show();
 
-    RouterWidget rw;
-    rw.show();
+    Client client;
 
 
     return a.exec();
