@@ -22,7 +22,8 @@ SOURCES += \
     login.cpp \
     main.cpp \
     mainwindow.cpp \
-    routerwidget.cpp
+    routerwidget.cpp \
+    tools.cpp
 
 HEADERS += \
     chatdialog.h \
@@ -30,7 +31,8 @@ HEADERS += \
     globals.h \
     login.h \
     mainwindow.h \
-    routerwidget.h
+    routerwidget.h \
+    tools.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

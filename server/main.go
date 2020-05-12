@@ -29,6 +29,7 @@ func main() {
 		}
 		if login(client) {
 			//client.Write([]byte("hello,client!"))
+
 			go handle(client)
 		} else {
 			log.Println("login failed!")
@@ -50,7 +51,7 @@ func handle(conn net.Conn) {
 	//conn.Write([]byte("hello, client!"))
 
 	for {
-		_, err := conn.Read(data[:])
+		n, err := conn.Read(data[:])
 		if err != nil {
 			log.Println("read error!", err)
 			//clientMap[]
@@ -63,7 +64,7 @@ func handle(conn net.Conn) {
 		if targetConn == nil {
 			fmt.Println("target server doesn't exist!")
 		} else {
-			_, err = targetConn.Write(data)
+			_, err = targetConn.Write(data[:n])
 			if err != nil {
 				fmt.Println("write failed:", err)
 			}

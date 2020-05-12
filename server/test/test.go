@@ -43,7 +43,6 @@ func main() {
 		msg := scanner.Text()
 
 		buffer := buildMeg(target, msg)
-		fmt.Println("message length: ", buffer.Len())
 		_, _ = server.Write(buffer.Bytes())
 	}
 }

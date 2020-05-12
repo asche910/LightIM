@@ -1,4 +1,8 @@
 #include "client.h"
+#include "tools.h"
+
+#include <QDataStream>
+#include <QDateTime>
 
 Client::Client(QObject *parent) : QObject(parent)
 {
@@ -18,6 +22,13 @@ Client::Client(QObject *parent) : QObject(parent)
     if(!client->waitForConnected(5000)){
         qDebug() << "connect error:" << client->errorString();
     }
+
+    qint64 timeStamp = QDateTime::currentSecsSinceEpoch();
+//    qDebug() << timeStamp;
+
+    QDateTime localAddSecs = QDateTime::fromSecsSinceEpoch(timeStamp);
+//    qDebug() << localAddSecs.toString("yyyy-MM-dd hh:mm:ss");
+
 }
 
 void Client::connected(){
@@ -38,11 +49,28 @@ void Client::readyRead(){
     qDebug() << client->bytesAvailable();
 
 
-    QByteArray *buffer = new QByteArray();
-
 //    client->read
 
     QByteArray buff = client->readAll();
 
     qDebug() << buff;
+
+    QDataStream stream(buff.mid(0, 8));
+    qint64 timestamp;
+    stream >> timestamp;
+
+    QDateTime localAddSecs = QDateTime::fromSecsSinceEpoch(timestamp);
+    QString time = localAddSecs.toString("yyyy-MM-dd hh:mm:ss");
+    qDebug() << time;
+
+    QString from = Tools::parseName(buff.mid(8, 16));
+    qDebug() << from;
+
+    qint16 contentLen;
+    QDataStream lenStream(buff.mid(42, 2));
+    lenStream >> contentLen;
+
+    QString content(buff.mid(42, contentLen));
+    qDebug() << content;
+
 }
