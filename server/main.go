@@ -5,6 +5,7 @@ import (
 	"github.com/asche910/LightIM/server/tool"
 	"log"
 	"net"
+	"net/http"
 )
 
 var (
@@ -19,7 +20,7 @@ func main() {
 	if err != nil {
 		log.Fatal("listen failed:", port, err)
 	}
-
+	go startHttp()
 	for {
 		client, err := listen.Accept()
 		fmt.Printf("%s connected!\n", client.RemoteAddr().String())
@@ -36,6 +37,16 @@ func main() {
 		}
 	}
 }
+
+func startHttp()  {
+	http.HandleFunc("/", httpHandle)
+	http.ListenAndServe(":9091", nil)
+}
+
+func httpHandle(w http.ResponseWriter, res *http.Request)  {
+	fmt.Fprintf(w, "Hello, %s!", res.URL.Path[1:])
+}
+
 
 func login(conn net.Conn) bool {
 	data := make([]byte, 1024)
