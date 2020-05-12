@@ -11,7 +11,9 @@ class Client : public QObject
 public:
     explicit Client(QObject *parent = nullptr);
 
+    void start();
 signals:
+    void receiveMsg(QString &time, QString &from, QString &content);
 
 public slots:
     void connected();
@@ -19,6 +21,7 @@ public slots:
     void bytesWritten(qint64 bytes);
     void readyRead();
 
+    void sendMsg(QString &to, QString &content);
 private:
     QTcpSocket *client;
 

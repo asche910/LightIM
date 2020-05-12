@@ -13,7 +13,7 @@ RouterWidget::RouterWidget(QWidget *parent): QWidget(parent)
     stackLayout = new QStackedLayout;
     stackLayout->addWidget(login);
     stackLayout->addWidget(mainwindow);
-    stackLayout->setCurrentIndex(1);
+    stackLayout->setCurrentIndex(0);
 
     connect(login, &Login::display, stackLayout, &QStackedLayout::setCurrentIndex);
     connect(mainwindow, &MainWindow::display, stackLayout, &QStackedLayout::setCurrentIndex);

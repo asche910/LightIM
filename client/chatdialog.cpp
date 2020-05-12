@@ -33,12 +33,19 @@ ChatDialog::ChatDialog(QWidget *parent) : QWidget(parent)
 
     setLayout(vlayout);
 
-    connect(btnSend, SIGNAL(clicked()), this, SLOT(sendEvent()));
+    client = new Client;
+    client->start();
+
+    connect(btnSend, SIGNAL(clicked()), this, SLOT(sendClicked()));
+    connect(client, &Client::receiveMsg, this, &ChatDialog::receiveMsg);
+
+    connect(this, &ChatDialog::sendMsg, client, &Client::sendMsg);
 }
 
-void ChatDialog::sendEvent(){
+void ChatDialog::sendClicked(){
     QString content = inputEdit->toPlainText();
     emit appendMessage(userList[curUserIndex], content);
+    emit sendMsg(userList[curUserIndex], content);
 }
 
 void ChatDialog::appendMessage(QString from, QString content){
@@ -54,4 +61,9 @@ void ChatDialog::appendMessage(QString from, QString content){
     table->cellAt(0, 1).firstCursorPosition().insertText(content);
     QScrollBar *bar = textEdit->verticalScrollBar();
     bar->setValue(bar->maximum());
+}
+
+
+void ChatDialog::receiveMsg(QString &time, QString &from, QString &content){
+    appendMessage(time + " " + from, content);
 }

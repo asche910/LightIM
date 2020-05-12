@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+
 #include <QMainWindow>
 
 class MainWindow : public QMainWindow
@@ -11,8 +12,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-//    static QList<QString> userList;
-//    static int curUserIndex;
+    void start();
 
 signals:
     void display(int number);

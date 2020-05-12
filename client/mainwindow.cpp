@@ -9,15 +9,10 @@
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent)
 {
+    resize(600, 400);
+}
 
-    QPushButton *btn = new QPushButton;
-    btn->setText("hello");
-
-    QPushButton *btnCancel = new QPushButton;
-    btnCancel->setText("Cancel");
-
-
-
+void MainWindow::start(){
     // left
     QListWidget *listWidget = new QListWidget;
     for(auto &i: userList){
@@ -38,22 +33,24 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent)
 
     setCentralWidget(centralSplitter);
 
+
     connect(listWidget, &QListWidget::currentRowChanged, this, &MainWindow::listListen);
 
-    resize(600, 400);
 }
 
 void MainWindow::handleLogin(QString username, QString password){
-    qDebug() << username;
-    qDebug() << password;
-
+//    qDebug() << username;
+//    qDebug() << password;
     loginUser = username;
+    qDebug() << "login user:" << loginUser;
+    start();
 }
 
 void MainWindow::listListen(int idx){
     curUserIndex = idx;
     qDebug() << idx << ": " << userList[idx];
 }
+
 
 MainWindow::~MainWindow()
 {

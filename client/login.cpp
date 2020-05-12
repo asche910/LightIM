@@ -69,7 +69,7 @@ Login::Login(QWidget *parent) : QWidget(parent)
 void Login::login(){
     QString username = editUserName->text();
     QString password = editPassword->text();
-    qDebug() << username;
+//    qDebug() << username;
 
     if(username.isEmpty()){
         QMessageBox::information(this, tr("error"), tr("username can't be empty!"));

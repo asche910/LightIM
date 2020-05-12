@@ -11,11 +11,9 @@ int main(int argc, char *argv[])
 //    MainWindow w;
 //    w.show();
 
-//    RouterWidget rw;
-//    rw.show();
+    RouterWidget rw;
+    rw.show();
 
-    Client client;
-
-
+//    Client client;
     return a.exec();
 }
