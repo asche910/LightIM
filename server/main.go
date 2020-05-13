@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/asche910/LightIM/server/tool"
 	"log"
@@ -38,13 +39,29 @@ func main() {
 	}
 }
 
+type Msg struct{
+	Code int
+	Data []string
+}
+
 func startHttp()  {
 	http.HandleFunc("/", httpHandle)
 	http.ListenAndServe(":9091", nil)
 }
 
 func httpHandle(w http.ResponseWriter, res *http.Request)  {
-	fmt.Fprintf(w, "Hello, %s!", res.URL.Path[1:])
+	m := Msg{
+		Code: 1,
+		Data: []string{},
+	}
+	for k := range clientMap {
+		m.Data = append(m.Data, k)
+	}
+	bytes, _ := json.Marshal(m)
+	fmt.Println(string(bytes))
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(bytes)
 }
 
 
